@@ -1,0 +1,25 @@
+#!/bin/bash
+
+##Creates a directory called "AMP_SCZ_collective" made up of the updated and correct structure folders/files (only ".csv") (i.e., only folders/files inside 59959 will be used)
+#Change wyassine to your own username 
+
+rsync -av --include '*/' --include '*/csv/' --include '*/csv/59959/' --include '*/csv/59959/*.csv' --exclude '*' --prune-empty-dirs "/volumes/prod-ampscz/collaboration-space/3705/" "/home/wyassine/AMP_SCZ_collective/"
+
+
+##Transfer the above to your dropbox
+
+#Download uploader 
+curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
+
+#Make it executable
+chmod +x dropbox_uploader.sh
+
+#Run it
+./dropbox_uploader.sh
+
+#Here you have to provide it with some permissions to access your Dropbox. You only need to do this once***
+
+#upload your AMP_SCZ_collective folder
+./dropbox_uploader.sh upload ~/AMP_SCZ_collective /Your/path/on/dropbox
+
+exit
